@@ -1,247 +1,169 @@
-![banner](assets/Credit_card_approval_banner.png)
-Banner [source](https://banner.godori.dev/)
+# Credit Risk Modeling
 
-![Python version](https://img.shields.io/badge/Python%20version-3.10%2B-lightgrey)
-![GitHub last commit](https://img.shields.io/github/last-commit/semasuka/Credit-card-approval-prediction-classification)
-![GitHub repo size](https://img.shields.io/github/repo-size/semasuka/Credit-card-approval-prediction-classification)
-![Type of ML](https://img.shields.io/badge/Type%20of%20ML-Binary%20Classification-red)
-![License](https://img.shields.io/badge/License-MIT-green)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1CfV6yEsHBjFiJbTKwY72k2g4AvszcF5R)
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/semasuka/credit-card-approval-prediction-classification/main/cc_approval_pred.py)
-[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+## Project Overview
+Credit risk modeling is crucial for financial institutions to assess the likelihood of a borrower defaulting on a loan. This project involves analyzing multiple datasets to identify factors influencing credit risk, ultimately leading to better decision-making processes. The project provides a credit risk assessment system powered by machine learning. It evaluates borrowers' default risk, calculates credit scores, and assigns credit ratings. The project is built using Python and Streamlit, providing an interactive and user-friendly interface.
 
-Badge [source](https://shields.io/)
+[**Web Link**](https://credit-risk-modeling-lauki-finance.streamlit.app/)
 
-# Key findings: People with the highest income, and who have at least one partner, are more likely to be approved for a credit card.
+## Default Risk Prediction: Model Evaluation and Deployment
 
+### Overview
+This project aims to develop a machine learning model to predict default risk, ensuring high accuracy and interpretability. The final model leverages advanced techniques to provide actionable insights, making it suitable for real-world deployment.
 
-## Authors
+### Key Features
+- **Dataset**: Imbalanced classification problem with 10% defaults.
+- **Techniques**:
+  - Feature engineering using domain relevance and statistical analysis.
+  - Resampling methods (over-sampling via SMOTE, under-sampling).
+- **Models Evaluated**:
+  - Logistic Regression
+  - Random Forest
+  - XGBoost
 
-- [@semasuka](https://www.github.com/semasuka)
+### Selected Model
+- **Model**: XGBoost with Optuna hyperparameter tuning and under-sampling.
+- **Metrics**:
+  - AUC: 0.98
+  - Gini Coefficient: 0.97
+  - KS Statistic: 86.87%
+- **Interpretability Tools**:
+  - SHAP (feature importance)
 
-## Table of Contents
+    ![FI](https://github.com/nafiul-araf/Credit-Risk-Modeling-End-to-End-Project/blob/main/images/Feature%20importance.png)
 
-  - [People with the highest education level, and who are either husbands or wifes make more money](#people-with-the-highest-education-level-and-who-are-either-husbands-or-wifes-make-more-money)
-  - [Authors](#authors)
-  - [Table of Contents](#table-of-contents)
-  - [Business problem](#business-problem)
-  - [Data source](#data-source)
-  - [Methods](#methods)
-  - [Tech Stack](#tech-stack)
-  - [Quick glance at the results](#quick-glance-at-the-results)
-  - [Lessons learned and recommendation](#lessons-learned-and-recommendation)
-  - [Limitation and what can be improved](#limitation-and-what-can-be-improved)
-  - [Run Locally](#run-locally)
-  - [Explore the notebook](#explore-the-notebook)
-  - [Deployment on streamlit](#deployment-on-streamlit)
-  - [App deployed on Streamlit](#app-deployed-on-streamlit)
-  - [Repository structure](#repository-structure)
-  - [Contribution](#contribution)
-  - [License](#license)
+  - LIME (local interpretability)
 
+    ![lime](https://github.com/nafiul-araf/Credit-Risk-Modeling-End-to-End-Project/blob/main/images/Lime.JPG)
 
+### Key Results
+- The model demonstrates superior ability to classify defaults with high precision and recall.
+- Decile analysis confirms excellent separation of high-risk instances.
 
+#### Deployment Readiness
+- **Strengths**:
+  - High performance across metrics
+  - Interpretability ensures alignment with business and regulatory requirements.
+- **Mitigation Strategies**: Address risks from under-sampling by periodic retraining.
 
-## Business problem
+### Visualizations
+1. AUC-ROC curve with near-perfect performance (AUC: 0.99).
 
-This app predicts if an applicant will be approved for a credit card or not. Each time there is a hard enquiry your credit score is affected negatively. This app predict the probability of being approved without affecting your credit score. This app can be used by applicant who wants to find out if they will be approved for a credit card without affecting their credit score.
-## Data source
+   ![rocauc](https://github.com/nafiul-araf/Credit-Risk-Modeling-End-to-End-Project/blob/main/images/ROC%20Curve.png)
+   
+2. SHAP summary plot illustrating top features influencing predictions.
 
-- [Kaggle credit card approval prediction](https://www.kaggle.com/rikdifos/credit-card-approval-prediction)
+### How to Use
+1. **Train the Model**: Scripts for data preprocessing, training, and hyperparameter tuning are included.
+2. **Evaluate the Model**: Tools for generating metrics, decile analysis, and interpretability plots.
+3. **Deploy the Model**: Prebuilt deployment pipeline for integration into business systems.
 
-## Methods
+### Why This Project Stands Out
+- Combines state-of-the-art machine learning techniques with interpretability.
+- Addresses a real-world business problem with rigor and precision.
+- Provides a clear path from model development to deployment.
 
-- Exploratory data analysis
-- Bivariate analysis
-- Multivarate correlation
-- S3 bucket model hosting
-- Model deployment
-## Tech Stack
-
-- Python (refer to requirement.txt for the packages used in this project)
-- Streamlit (interface for the model)
-- AWS S3 (model storage)
-
-
-## Quick glance at the results
-
-Correlation between the features.
-
-![heatmap](assets/heatmap.png)
-
-Confusion matrix of gradrient boosting classifier.
-
-![Confusion matrix](assets/confusion_matrix.png)
-
-ROC curve of gradrient boosting classifier.
-
-![ROC curve](assets/roc.png)
-
-Top 3 models (with default parameters)
-
-| Model     	                | Recall score 	|
-|-------------------	        |------------------	|
-| Support vector machine     	| 88% 	            |
-| Gradient boosting    	        | 90% 	            |
-| Adaboost               	    | 79% 	            |
+---
 
 
-- ***The final model used is: Gradient boosting***
-- ***Metrics used: Recall***
-- Why choose precision as metrics:
-  Since the objective of this problem is to minimize the risk of credit default for the financial institution, the metrics to use depends on the current economical situation:
 
-  - During the time of a bull market (when the economy is expending), people feel wealthy and usually are employed. Money is usually cheap and the risk of default is low. The financial institution is able to handle the risk of default therefore is not very strict on giving out credit. The financial institution can handle a number of bad clients as long as the vast majority of applicants are good clients (aka those who payback their credit).In this case, having a good recall (sensitivity) is ideal.
-  - During a bear market (when the economy is contracting), people loose their jobs and their money through the stock market. Many people struggle to meet their financial obligations. The financial institution therefore tend to be more conservative on giving out credit or loans. The financial institution can't afford to give out credit to clients who won't be able to pay back their credit. The financial institution would rather have a smaller number of good clients even if it means that some good clients where denied credit, and ideally not have any bad client. In this case, having a good precision (specificity) is desirable.
+# **Running the Project: Credit Risk Modeling**
 
-    Note: There is always a trade-off between precision and recall. Choosing the right metrics depends on the problem you are solving.
+## **Features**
+- **Interactive Credit Risk Assessment**: Input borrower and loan details and get real-time predictions.
+- **Advanced Machine Learning**: Uses a fine-tuned XGBoost model for robust and accurate predictions.
+- **Scalable Design**: Modular structure with reusable utilities and hyperparameter tuning.
 
-    Conclusion: In our case, since we are in the longest bull market (not including the March 2020 flash crash), we will use recall as our metric.
+---
 
+## **Project Directory Structure**
 
-## Lessons learned and recommendation
+```
+project-root/
+│
+├── model/
+│   ├── model_data.pkl                # Serialized machine learning model and preprocessing data
+│   ├── tuned_hyperparameters.txt    # Details of the optimized hyperparameters
+│
+├── Lauki Finance.JPG                # Project logo or related image
+├── Readme.md                        # Documentation file
+├── main.py                          # Streamlit application file
+├── requirements.txt                 # List of required Python packages
+├── utils.py                         # Utility functions for prediction and preprocessing
+```
 
-- Based on the analysis on this project, we found out that the education level and type of relationship are the most predictive features to determine if someone makes more or less than 50K. Other features like Capital gain, hours work and age are also usefull. The least usefull features are: their occupation and the workclass they belong to.
-- Recommendation would be to focus more on the most predictive feature when looking at the applicant profile, and pay less attention on their occupation and workclass.
-## Limitation and what can be improved
+---
 
-- Speed: since the model is stored on AWS S3, it can take some few seconds to load. Solution: cache the model with the Streamlit @st.experimental_singleton for faster reload.
-- Dataset used: the dataset used is from 1990, inflation has not been taken into consideration and the countries's economies have changed since then. Solution: retrain with a more recent dataset.
-- Hyperparameter tuning: I used RandomeSearchCV to save time but could be improved by couple of % with GridSearchCV.
+## **Installation Guide**
 
-
-## Run Locally
-Initialize git
-
+### **Step 1: Clone the Repository**
+Download the project repository to your local machine:
 ```bash
-git init
+git clone https://github.com/username/repository-name.git
+cd repository-name//project-root
 ```
 
-
-Clone the project
-
+### **Step 2: Set Up the Python Environment**
+Ensure you have Python 3.8 or higher installed. It is recommended to use a virtual environment:
 ```bash
-git clone https://github.com/semasuka/Credit-card-approval-prediction-classification.git
+python -m venv venv
+source venv/bin/activate    # On macOS/Linux
+venv\Scripts\activate       # On Windows
 ```
 
-enter the project directory
-
+### **Step 3: Install Dependencies**
+Install all the required Python packages listed in `requirements.txt`:
 ```bash
-cd Credit-card-approval-prediction-classification
+pip install -r requirements.txt
 ```
 
-Create a conda virtual environment and install all the packages from the environment.yml (recommended)
-
+### **Step 4: Run the Application**
+Start the Streamlit application by running the following command:
 ```bash
-conda env create --prefix <env_name> --file assets/environment.yml
+streamlit run main.py
 ```
 
-Activate the conda environment
+---
 
-```bash
-conda activate <env_name>
-```
+## **How to Use**
+1. Open the URL displayed in your terminal after running `streamlit run main.py`. Typically, it will be something like `http://localhost:8501/`.
+2. Use the interactive interface to:
+   - Enter borrower details (age, income, loan amount, etc.).
+   - Adjust sliders and dropdowns for other inputs.
+   - Click "Calculate Risk" to view the results, including:
+     - Default Probability
+     - Credit Score
+     - Credit Rating
+3. Review the risk insights and recommendations provided in the results.
 
-List all the packages installed
+---
 
-```bash
-conda list
-```
+## **Additional Notes**
 
-Start the streamlit server locally
+### **Dependencies**
+The project requires the following key libraries:
+- `streamlit`: For building the interactive web interface.
+- `scikit-learn`: For preprocessing and model handling.
+- `joblib`: For loading the serialized model.
+- `pandas` and `numpy`: For data manipulation.
+- `xgboost` and others
 
-```bash
-streamlit run cc_approval_pred.py
-```
-If you are having issue with streamlit, please follow [this tutorial on how to set up streamlit](https://docs.streamlit.io/library/get-started/installation)
+All dependencies are listed in `requirements.txt` for easy installation.
 
-## Explore the notebook
+### **Customizations**
+- To use a different machine learning model, replace `model_data.pkl` with your serialized model and adjust the features in `utils.py`.
+- Update the interface in `main.py` to reflect any changes to the inputs or outputs.
 
-To explore the notebook file [here](https://nbviewer.org/github/semasuka/Income-classification/blob/master/Income_Classification.ipynb)
+---
 
-## Deployment on streamlit
+## **Example Screenshots**
+1. **Home Page**: Displays the project title and input interface.
+2. **Results Page**: Shows default probability, credit score, and rating with actionable insights.
 
-To deploy this project on streamlit share, follow these steps:
-
-- first, make sure you upload your files on Github, including a requirements.txt file
-- go to [streamlit share](https://share.streamlit.io/)
-- login with Github, Google, etc.
-- click on new app button
-- select the Github repo name, branch, python file with the streamlit codes
-- click advanced settings, select python version 3.9 and add the secret keys if your model is stored on AWS or GCP bucket
-- then save and deploy!
-
-## App deployed on Streamlit
-
-![Streamlit GIF](assets/gif_streamlit.gif)
-## Repository structure
-
-
-```
+![image](https://github.com/user-attachments/assets/d1b51282-cf2a-4e9a-ab19-fbe407b425ba)
 
 
-├── datasets
-│   ├── GDP.csv                     <- the data used to feature engineering/enriched the original data.
-│   ├── test.csv                    <- the test data.
-│   ├── train.csv                   <- the train data.
-│
-│
-├── assets
-│   ├── confusion_matrix.png        <- confusion matrix image used in the README.
-│   ├── gif_streamlit.gif           <- gif file used in the README.
-│   ├── heatmap.png                 <- heatmap image used in the README.
-│   ├── Income_classification.png   <- banner image used in the README.
-│   ├── environment.yml             <- list of all the dependencies with their versions(for conda environment).
-│   ├── roc.png                     <- ROC image used in the README.
-│
-├── pandas_profile_file
-│   ├── income_class_profile.html   <- exported panda profile html file.
-│
-│
-├── .gitignore                      <- used to ignore certain folder and files that won't be commit to git.
-│
-│
-├── Income_Classification.ipynb     <- main python notebook where all the analysis and modeling are done.
-│
-│
-├── LICENSE                         <- license file.
-│
-│
-├── income_class_st.py              <- file with the best model and best hyperparameter with streamlit component for rendering the interface.
-│
-│
-├── README.md                       <- this readme file.
-│
-│
-├── requirements.txt                <- list of all the dependencies with their versions(used for Streamlit ).
 
-```
-## Contribution
+---
 
-Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change or contribute.
 
-## License
 
-MIT License
-
-Copyright (c) 2022 Stern Semasuka
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-Learn more about [MIT](https://choosealicense.com/licenses/mit/) license
